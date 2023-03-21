@@ -1,23 +1,12 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import Item from "./Item";
+import ItemsContext from "../../context/ItemsContext";
 
 function ItemsList(){
-    const [items, setItems] = useState([])
+    const itemsContext=useContext(ItemsContext);
 
-
-    const load=()=>{
-        fetch('http://localhost:8000/api/items')
-            .then((response)=>{
-                return response.json()
-            }).then((data)=>{
-            setItems(data);
-        });
-    };
-    useEffect(()=>{
-        load();
-    },[]);
     const itemsList=[];
-    items.forEach((item)=>{
+    itemsContext.items.forEach((item)=>{
         itemsList.push(<Item key={item.id} item={item}></Item>);
     });
 
@@ -32,6 +21,7 @@ function ItemsList(){
                         <th>Pavadinimas</th>
                         <th>Vieta</th>
                         <th>Atsakingas asmuo</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>

@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import ItemsList from "./items/ItemsList";
+import ItemNew from "./items/ItemNew";
 
 function Inventorizacija() {
 
@@ -9,7 +10,7 @@ function Inventorizacija() {
                 <ItemsList></ItemsList>
             </div>
             <div className="col-md-4">
-
+                <ItemNew></ItemNew>
             </div>
         </div>
     );
