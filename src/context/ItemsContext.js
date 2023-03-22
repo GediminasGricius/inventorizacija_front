@@ -18,12 +18,16 @@ const ItemsContext = React.createContext({
     ],
     addItem:(item)=>{},
     load:()=>{},
-    deleteItem:()=>{}
+    deleteItem:()=>{},
+    itemEdit:null,
+    setItemEdit:(item)=>{},
+    updateItem:(item)=>{},
 });
 
 export const ItemsContextProvider=(props)=>{
     const [items,setItems]=useState([]);
     const [users,setUsers]=useState([]);
+    const [itemEdit,setItemEdit]=useState(null);
 
     const load=()=>{
         fetch('http://localhost:8000/api/items')
@@ -70,6 +74,17 @@ export const ItemsContextProvider=(props)=>{
            load();
         });
     }
+    const updateItem=(item)=>{
+        fetch("http://localhost:8000/api/items/"+item.id,{
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(item),
+        }).then(()=>{
+            load();
+        });
+    }
     const deleteItem=(index)=>{
         fetch("http://localhost:8000/api/items/"+index,{
             method: "DELETE",
@@ -88,6 +103,9 @@ export const ItemsContextProvider=(props)=>{
             addItem:addItem,
             load:load,
             deleteItem:deleteItem,
+            itemEdit: itemEdit,
+            setItemEdit: setItemEdit,
+            updateItem:updateItem,
         }}>
              {props.children}
         </ItemsContext.Provider>

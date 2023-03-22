@@ -22,6 +22,7 @@ function ItemsList(){
                         <th>Vieta</th>
                         <th>Atsakingas asmuo</th>
                         <th></th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
